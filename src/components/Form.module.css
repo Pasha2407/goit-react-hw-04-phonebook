@@ -6,7 +6,8 @@
   background-color: white;
   margin-top: 40px;
 }
-.form > label {
+
+.form>label {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -14,6 +15,7 @@
   margin-bottom: 20px;
   width: 170px;
 }
+
 input[type='text']:focus {
-  box-shadow: 0 0 4px 4px #a2c7ff;
+  box-shadow: 0 0 4px 4px #a0c4fa;
 }
