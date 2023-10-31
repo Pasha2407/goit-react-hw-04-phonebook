@@ -1,49 +1,54 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import css from './Form.module.css';
 
-export class ContactForm extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+const ContactForm = ({ addContact }) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-  InputChange = event => {
+  const InputChange = event => {
     const value = event.target.value;
     const name = event.target.name;
-    this.setState({ [name]: value });
+    switch (name) {
+      case 'name': {
+        setName(value);
+        return;
+      }
+      case 'number': {
+        setNumber(value);
+        return;
+      }
+      default:
+        return;
+    }
   };
 
-  Submit = event => {
+  const Submit = event => {
     event.preventDefault();
     const contactData = {
-      name: this.state.name,
-      number: this.state.number,
+      name: name,
+      number: number,
     };
-    this.props.addContact(contactData);
-    this.setState({ name: '', number: '' });
+    addContact(contactData);
+    setName('');
+    setNumber('');
   };
 
-  render() {
-    return (
-      <form onSubmit={this.Submit} className={css.form}>
-        <label>
-          <span>Name</span>
-          <input
-            type="text"
-            name="name"
-            onChange={this.InputChange}
-            value={this.state.name}
-          />
-          <span>Number</span>
-          <input
-            type="text"
-            name="number"
-            onChange={this.InputChange}
-            value={this.state.number}
-          />
-        </label>
-        <button type="submit">Add contact </button>
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={Submit} className={css.form}>
+      <label>
+        <span>Name</span>
+        <input type="text" name="name" onChange={InputChange} value={name} />
+        <span>Number</span>
+        <input
+          type="text"
+          name="number"
+          onChange={InputChange}
+          value={number}
+        />
+      </label>
+      <button type="submit">Add contact </button>
+    </form>
+  );
+};
+
+export default ContactForm;
