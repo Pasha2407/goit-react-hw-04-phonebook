@@ -6,11 +6,9 @@ import css from './Form.module.css';
 import { nanoid } from 'nanoid';
 
 export const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    const stringifiedContacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(stringifiedContacts) ?? contacts;
-    return parsedContacts;
-  });
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(localStorage.getItem('contacts')) ?? []
+  );
 
   const [filter, setFilter] = useState('');
 
